@@ -21,10 +21,16 @@
 }
 
 body {
-    background: linear-gradient(135deg, #72DCFF, #6B4DFF);
+    /* background: linear-gradient(135deg,  #72DCFF, #6B4DFF); */
+    background: linear-gradient(150deg, #72DCFF, #6B4DFF);
     display: flex;
     justify-content: center;
     font-size: 1rem; 
+    background-origin: border-box;
+    min-height: 100vh;
+    position: relative; 
+
+    
 }
 
 form {
@@ -69,6 +75,7 @@ button:active {
 
 
 #container {
+
     background: rgba(255, 255, 255, 0.2); 
     backdrop-filter: blur(10px); 
     box-shadow: var(--box-shadow); 
