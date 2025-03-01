@@ -8,6 +8,7 @@
     --text-color: #333;
     --gap: 1.6rem;
     --global-transition: all 0.1s ease-in-out;
+    
 }
 
 /* General Styling */
@@ -60,13 +61,13 @@ ul{
     transition: var(--global-transition);
 }
 
-#button-add:hover{
-    opacity: 0.8;
+button:hover{
+    
     box-shadow: 0 5px 5px #333;
     cursor: pointer;
 }
 
-#button-add:active{
+button:active{
     transform: scale(0.95);
     transform: translateY(4px);
 }
@@ -87,7 +88,18 @@ ul{
 
 #stats{
     display: flex;
-    gap: 1.6rem;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.4rem;
+}
+
+#button-hide-completed{
+    border: none;
+    background-color: #FFF5D8;
+    border-radius: var(--border-radius);
+    padding: var(--padding);
+
 }
 
 .stat-description{
@@ -181,4 +193,6 @@ ul{
         width: 15rem;
         
     }
+
+  
 }

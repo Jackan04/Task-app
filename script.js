@@ -7,6 +7,9 @@ const taskList = document.querySelector("#task-list")
 const buttonHideCompleted = document.querySelector("#button-hide-completed")
 
 let tasks = JSON.parse(localStorage.getItem("tasks")) || []
+let hideCompleted = false
+
+
 
 taskForm.addEventListener("submit", function(event){
     event.preventDefault();
@@ -29,18 +32,19 @@ taskForm.addEventListener("submit", function(event){
 })
 
 
+
 buttonHideCompleted.addEventListener("click", function(){
+    
+    if(hideCompleted){
+        buttonHideCompleted.textContent = "Hide completed"
+        hideCompleted = false
+    }
+    else if(hideCompleted == false){
+        buttonHideCompleted.textContent = "Show completed"
+        hideCompleted = true
+    }
 
-        const taskElements = document.querySelectorAll(".task")
-
-        taskElements.forEach(taskElement =>{
-            if(taskElement.classList.contains("completed")){
-                taskElement.style.display = "none"
-            }
-        })
-
-        localStorage.setItem("tasks", JSON.stringify(tasks))
-
+    renderTasks()
 })
 
 
@@ -89,6 +93,15 @@ function renderTask(task){
             updateStats()
     })
 
+    taskElement.addEventListener("dblclick", function(event){
+        const taskElement = event.target.closest("li"); 
+        const taskId = Number(taskElement.id); 
+        tasks = tasks.filter(task => task.id !== taskId);
+   
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+        taskElement.remove();
+        renderTasks()
+    })
   
 }
 
@@ -103,14 +116,27 @@ function updateStats(){
 }
 
 
+
+
+
 function renderTasks(){
     taskList.innerHTML = ""
+    if(tasks.length == 0){
+        buttonHideCompleted.style.display = "none"
+    }
+    else{
+        buttonHideCompleted.style.display = "flex"
+    }
     tasks.sort((a,b) => a.isCompleted - b.isCompleted)
-    
     tasks.forEach(task => {
-      
+
+        if(hideCompleted && task.isCompleted){
+            return
+        }
         renderTask(task)
     });
+
+    localStorage.setItem("tasks", JSON.stringify(tasks))
 }
 
 renderTasks()
