@@ -9,7 +9,9 @@ const buttonHideCompleted = document.querySelector("#button-hide-completed")
 let tasks = JSON.parse(localStorage.getItem("tasks")) || []
 let hideCompleted = false
 
-
+function saveTasks(){
+    localStorage.setItem("tasks", JSON.stringify(tasks))
+}
 
 taskForm.addEventListener("submit", function(event){
     event.preventDefault();
@@ -33,24 +35,26 @@ taskForm.addEventListener("submit", function(event){
 
 
 
-buttonHideCompleted.addEventListener("click", function(){
+    buttonHideCompleted.addEventListener("click", function(){
     
-    if(hideCompleted){
-        buttonHideCompleted.textContent = "Hide completed"
-        hideCompleted = false
-    }
-    else if(hideCompleted == false){
-        buttonHideCompleted.textContent = "Show completed"
-        hideCompleted = true
-    }
+        if(hideCompleted){
+            buttonHideCompleted.textContent = "Hide completed"
+            hideCompleted = false
+        }
+        else if(hideCompleted == false){
+            buttonHideCompleted.textContent = "Show completed"
+            hideCompleted = true
+        }
+    
+        renderTasks()
+    })
 
-    renderTasks()
-})
+
 
 
 function addNewTask(task){
     tasks.push(task)
-    localStorage.setItem("tasks", JSON.stringify(tasks))
+    saveTasks()
     renderTask(task)
     renderTasks()
     updateStats()
@@ -88,7 +92,7 @@ function renderTask(task){
             
         }
 
-        localStorage.setItem("tasks", JSON.stringify(tasks))
+        saveTasks()
         renderTasks()
         updateStats()
 })
@@ -101,7 +105,7 @@ function renderTask(task){
 
         if(confirmation){
             tasks = tasks.filter(task => task.id !== taskId);
-            localStorage.setItem("tasks", JSON.stringify(tasks));
+            saveTasks()
             taskElement.remove();
             renderTasks()
             updateStats()
@@ -115,24 +119,26 @@ function updateStats(){
     const completedTasksCounter = tasks.filter(task => task.isCompleted).length
     const remainingTasksCounter = tasks.filter(task => !task.isCompleted).length
     const totalTasksCounter = tasks.length
-    completedTasks.textContent = completedTasksCounter
-    remainingTasks.textContent = remainingTasksCounter
-    totalTasks.textContent = totalTasksCounter
+
+    if(tasks.length == 0){
+        completedTasks.textContent = "0"
+        remainingTasks.textContent = "0"
+        totalTasks.textContent = "0"
+    }else{
+        completedTasks.textContent = completedTasksCounter
+        remainingTasks.textContent = remainingTasksCounter
+        totalTasks.textContent = totalTasksCounter
+    }
+    
+
+    buttonHideCompleted.style.display = tasks.length ? "flex" : "none"
 
 }
 
 
-
-
-
 function renderTasks(){
     taskList.innerHTML = ""
-    if(tasks.length == 0){
-        buttonHideCompleted.style.display = "none"
-    }
-    else{
-        buttonHideCompleted.style.display = "flex"
-    }
+
     tasks.sort((a,b) => a.isCompleted - b.isCompleted)
     tasks.forEach(task => {
 
@@ -142,7 +148,7 @@ function renderTasks(){
         renderTask(task)
     });
 
-    localStorage.setItem("tasks", JSON.stringify(tasks))
+    saveTasks()
 }
 
 renderTasks()
