@@ -106,7 +106,7 @@ ul{
     margin-left: 5px;
 }
 
-#tasks{
+#task-list{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -126,6 +126,11 @@ ul{
     background-color: white;
 }
 
+ .completed{
+    text-decoration:line-through;
+    opacity: 0.4;
+}
+
 .task span{
     font-size: 1.5rem;
 }
@@ -139,6 +144,11 @@ ul{
     cursor: pointer;
     margin-left: 1rem;
     transition: var(--global-transition);
+}
+
+.task input[type="checkbox"]:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
 }
 
 .task input:active{
