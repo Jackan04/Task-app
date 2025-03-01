@@ -62,13 +62,12 @@ ul{
 }
 
 button:hover{
-    
-    box-shadow: 0 5px 5px #333;
+    opacity: 0.7;
     cursor: pointer;
 }
 
 button:active{
-    transform: scale(0.95);
+    transform: scale(0.9);
     transform: translateY(4px);
 }
 

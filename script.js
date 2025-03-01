@@ -75,32 +75,38 @@ function renderTask(task){
     taskList.appendChild(taskElement)
     taskElement.classList.add("task")
 
-        checkbox.addEventListener("change", function(){
-        task.isCompleted = checkbox.checked
-       
-            if(task.isCompleted){
-                taskElement.classList.add("completed")
-                
-                
-            }
-            else{
-                taskElement.classList.remove("completed")
-                
-            }
+    checkbox.addEventListener("change", function(){
+    task.isCompleted = checkbox.checked
 
-            localStorage.setItem("tasks", JSON.stringify(tasks))
-            renderTasks()
-            updateStats()
-    })
+        if(task.isCompleted){
+            taskElement.classList.add("completed")
+            
+            
+        }
+        else{
+            taskElement.classList.remove("completed")
+            
+        }
 
-    taskElement.addEventListener("dblclick", function(event){
+        localStorage.setItem("tasks", JSON.stringify(tasks))
+        renderTasks()
+        updateStats()
+})
+        // Removing a task
+        taskElement.addEventListener("dblclick", function(event){
         const taskElement = event.target.closest("li"); 
         const taskId = Number(taskElement.id); 
-        tasks = tasks.filter(task => task.id !== taskId);
-   
-        localStorage.setItem("tasks", JSON.stringify(tasks));
-        taskElement.remove();
-        renderTasks()
+        
+        const confirmation = confirm(`Are you sure you want to delete: "${task.name}"?`);
+
+        if(confirmation){
+            tasks = tasks.filter(task => task.id !== taskId);
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+            taskElement.remove();
+            renderTasks()
+            updateStats()
+        }
+      
     })
   
 }
