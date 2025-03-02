@@ -49,10 +49,10 @@ ul {
     padding: 0.5rem 5rem 0.5rem 1rem;
     border: none;
     text-align: start;
-    font-size: 1rem;
+    font-size: 1.2rem;
 }
 
-input:focus {
+button:focus, input:focus {
     outline: none;
 }
 
@@ -60,6 +60,9 @@ input:focus {
     border: none;
     border-radius: var(--border-radius);
     background: var(--primary-color);
+    font-size: 3rem;
+    width: 3rem;
+    height: 3rem;
     font-size: 2rem;
     color: var(--text-color);
 }
@@ -160,6 +163,11 @@ input[type="date"]{
     border-radius: var(--border-radius);
     background-color: var(--primary-color);
     overflow: hidden; 
+}
+
+.task span{
+    display: flex;
+    flex-direction: column;
 }
 
 .completed {

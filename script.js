@@ -40,7 +40,7 @@ taskForm.addEventListener("submit", function(event){
 
 buttonToggleDatePicker.addEventListener("click", function(event){
     event.preventDefault()
-    
+
     if(isDatePickerOpen == false){
         dueDateInput.showPicker()
         isDatePickerOpen = true;
@@ -102,17 +102,16 @@ function renderTask(task){
     taskDate.setHours(0, 0, 0, 0); 
     
     if (taskDate.getTime() === todaysDate.getTime()) { 
-       taskElement.style.backgroundColor = "#FFE5D3"
+       dueDateElement.textContent = "Today"
+    }else{
+        dueDateElement.textContent = task.duedate
     }
-    // else{
-    //     dueDateElement.textContent = task.duedate
-    // }
     
- 
     dueDateElement.style.fontSize = "10px"
     dueDateElement.style.paddingRight = "10px"
 
-    taskElement.append(checkbox, taskName, dueDateElement)
+    taskElement.append(checkbox, taskName)
+    taskName.append(dueDateElement)
     taskList.appendChild(taskElement)
     taskElement.classList.add("task")
 
@@ -172,17 +171,6 @@ function updateStats(){
     buttonHideCompleted.style.display = tasks.length ? "flex" : "none"
 
 }
-
-// function isToday(dateString) {
-//     const today = new Date();
-//     const taskDate = new Date(dateString);
-
-//     return (
-//         today.getFullYear() === taskDate.getFullYear() &&
-//         today.getMonth() === taskDate.getMonth() &&
-//         today.getDate() === taskDate.getDate()
-//     );
-// }
 
 
 
