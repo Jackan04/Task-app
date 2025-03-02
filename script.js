@@ -5,9 +5,12 @@ const remainingTasks = document.querySelector("#remaining-tasks")
 const totalTasks = document.querySelector("#total-tasks")
 const taskList = document.querySelector("#task-list")
 const buttonHideCompleted = document.querySelector("#button-hide-completed")
+const buttonToggleDatePicker = document.querySelector("#button-toggle-datepicker")
+const dueDateInput = document.querySelector("#duedate-input")
 
 let tasks = JSON.parse(localStorage.getItem("tasks")) || []
 let hideCompleted = false
+let isDatePickerOpen = false
 
 function saveTasks(){
     localStorage.setItem("tasks", JSON.stringify(tasks))
@@ -15,8 +18,9 @@ function saveTasks(){
 
 taskForm.addEventListener("submit", function(event){
     event.preventDefault();
-
+       
     let inputValue = taskInput.value
+    let inputDate = dueDateInput.value
 
     if(inputValue == ""){
         return
@@ -26,11 +30,25 @@ taskForm.addEventListener("submit", function(event){
         id: new Date().getTime(),
         name: inputValue,
         isCompleted: false,
+        duedate: inputDate,
     }
 
     addNewTask(task)
     taskInput.value = ""
    
+})
+
+buttonToggleDatePicker.addEventListener("click", function(event){
+    event.preventDefault()
+    
+    if(isDatePickerOpen == false){
+        dueDateInput.showPicker()
+        isDatePickerOpen = true;
+    }else {
+        dueDateInput.blur(); 
+        isDatePickerOpen = false;
+    }
+    
 })
 
 
@@ -60,8 +78,10 @@ function addNewTask(task){
     updateStats()
 }
 
+
 function renderTask(task){
     const taskElement = document.createElement("li")
+    const dueDateElement = document.createElement("span")
     taskElement.classList.add("task")
     taskElement.setAttribute("id", task.id)
 
@@ -74,8 +94,25 @@ function renderTask(task){
     checkbox.setAttribute("type", "checkbox")
     checkbox.checked = task.isCompleted
     taskName.textContent = task.name
-    taskElement.appendChild(checkbox)
-    taskElement.appendChild(taskName)
+
+    let todaysDate = new Date();
+    todaysDate.setHours(0, 0, 0, 0); 
+    
+    let taskDate = new Date(task.duedate); 
+    taskDate.setHours(0, 0, 0, 0); 
+    
+    if (taskDate.getTime() === todaysDate.getTime()) { 
+       taskElement.style.backgroundColor = "#FFE5D3"
+    }
+    // else{
+    //     dueDateElement.textContent = task.duedate
+    // }
+    
+ 
+    dueDateElement.style.fontSize = "10px"
+    dueDateElement.style.paddingRight = "10px"
+
+    taskElement.append(checkbox, taskName, dueDateElement)
     taskList.appendChild(taskElement)
     taskElement.classList.add("task")
 
@@ -96,6 +133,7 @@ function renderTask(task){
         renderTasks()
         updateStats()
 })
+
         // Removing a task
         taskElement.addEventListener("dblclick", function(event){
         const taskElement = event.target.closest("li"); 
@@ -134,6 +172,18 @@ function updateStats(){
     buttonHideCompleted.style.display = tasks.length ? "flex" : "none"
 
 }
+
+// function isToday(dateString) {
+//     const today = new Date();
+//     const taskDate = new Date(dateString);
+
+//     return (
+//         today.getFullYear() === taskDate.getFullYear() &&
+//         today.getMonth() === taskDate.getMonth() &&
+//         today.getDate() === taskDate.getDate()
+//     );
+// }
+
 
 
 function renderTasks(){

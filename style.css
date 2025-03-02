@@ -49,10 +49,10 @@ ul {
     padding: 0.5rem 5rem 0.5rem 1rem;
     border: none;
     text-align: start;
-    font-size: 1.25rem;
+    font-size: 1rem;
 }
 
-#task-input:focus {
+input:focus {
     outline: none;
 }
 
@@ -60,11 +60,8 @@ ul {
     border: none;
     border-radius: var(--border-radius);
     background: var(--primary-color);
-    width: 4.5rem;
-    height: 3.9375rem;
-    font-size: 3.125rem;
+    font-size: 2rem;
     color: var(--text-color);
-    transition: var(--global-transition);
 }
 
 button:hover,
@@ -80,7 +77,6 @@ button:active {
     backdrop-filter: blur(10px); 
     box-shadow: var(--box-shadow); 
     border: 1px solid rgba(255, 255, 255, 0.3);
-    max-width: 460px;
     max-height: fit-content;
     margin: 10rem 5rem;
     border-radius: var(--border-radius);
@@ -131,11 +127,34 @@ button:active {
     gap: var(--gap);
 }
 
+#duedate-input{
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: none;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#button-toggle-datepicker{
+    padding: var(--padding);
+    border: none;
+    border-radius: var(--border-radius);
+    background-color: var(--primary-color);
+}
+
+input[type="date"]{
+    border: none;
+    padding: var(--padding);
+    border-radius: var(--border-radius);
+}
+
 .task {
     display: flex;
     align-items: center;
+    justify-content: start;
     gap: var(--gap);
-    min-width: 15rem; 
+    min-width: 20rem; 
     height: 2.5rem; 
     box-shadow: var(--box-shadow);
     border-radius: var(--border-radius);
@@ -220,3 +239,4 @@ button:active {
         max-width: 14rem;
     }
 }
+

@@ -6,6 +6,8 @@
     <title>Task App</title>
     <link href="style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 
 </head>
 <body>
@@ -15,7 +17,12 @@
             
                 <form id="task-form" name="task-form">
                     <input name="task-input" id="task-input" type="text" placeholder="eg. Buy bread" autofocus aria-autocomplete="none">
+                    <div id="date-picker-container">
+                        <button id="button-toggle-datepicker"><i class="fa fa-calendar"></i></button>
+                        <input type="date" placeholder="Due Date" id="duedate-input">
+                    </div>
                     <button id="button-add" type="submit">+</button>
+              
                
                 </form>
                 
@@ -51,7 +58,9 @@
             
         </div>
       
-  
+        <button>
+
+        </button>
     </main>
     
     <script src="script.js"></script>
