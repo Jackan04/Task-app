@@ -1,5 +1,6 @@
 /* Variables */
 :root {
+    --background: #F5F6F8;
     --primary-color: white;
     --box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     --border-radius: 0.625rem;
@@ -21,7 +22,8 @@
 }
 
 body {
-    background: linear-gradient(135deg, #3A82F1, #144796);
+    /* background: linear-gradient(135deg, #3A82F1, #144796); */
+    background-color: var(--background);
     display: flex;
     justify-content: center;
     font-size: 1rem; 
@@ -112,6 +114,21 @@ button:active {
     gap: 1.4rem;
 }
 
+.stat-completed{
+    background-color: #D5F5D9;
+}
+
+.stat-remaining{
+    background-color: #FFE5D3;
+}
+
+.stat-total{
+    background-color: #CCDEFC;
+}
+
+    
+    
+
 #button-hide-completed {
     border: none;
     background-color: rgba(254, 223, 122, 0.9);
@@ -121,7 +138,6 @@ button:active {
 
 .stat-description {
     border-radius: var(--border-radius);
-    background: rgba(255, 255, 255, 0.6);
     width: 7.1875rem;
     height: 2.31744rem;
     padding: 7px 0 7px 7px;
@@ -154,8 +170,8 @@ button:active {
 
 #button-toggle-datepicker{
     padding: var(--padding);
-    background-color: #F7336E;
-    color: white;
+    background-color: var(--primary-color);
+    color: #333;
     border: none;
     border-radius: var(--border-radius);
 
